@@ -20,63 +20,38 @@ usermod -aG wheel webmethods
 su webmethods -
 groups
 ```
-
 * Edit .bash_profile of user
 ```bash
 JAVA_HOME=/
-
 export JAVA_HOME
-
 export PATH
 # Surcharge pour le prompt
 export PS1="\[\033[34m\]\u\[\033[00m\]@\[\033[32m\]\h\[\033[00m\]:\[\033[33m\]\w\[\033[00m\]> "
-
 # Couleurs dans le shell
 export CLICOLOR=1
 export LSCOLORS=dxfxcxdxbxegedabagacad
 ```
-
-
-
-
-
-[root@DLNXESBV2APPAPI01 ~]$ su webmethods -
- [webmethods@DLNXESBV2APPAPI01 root]$ groups
-webmethods wheel
-[webmethods@DLNXESBV2APPAPI01 root]$ sudo whoami
-
-We trust you have received the usual lecture from the local System
-Administrator. It usually boils down to these three things:
-    #1) Respect the privacy of others.
-    #2) Think before you type.
-    #3) With great power comes great responsibility.
-[sudo] password for webmethods:
-Root
-
+* Check shared-memory (must be greater than 629145600)
+```bash
 sudo sysctl -a | fgrep kernel.shmmax
-[sudo] password for webmethods:
-kernel.shmmax = 18446744073692774399
+```
+* Check File Descriptor (must be greater than 200000)
+```bash
+sudo sysctl -a | grep ^fs.file*
+sudo cat /proc/sys/fs/file-max
+```
+* Check „ulimit“ and change 
+```bash
+ulimit -Hn
 
-•	[Prérequis technique] Vérification des paramètres de la „file descriptor“
+ulimit -Sn
 
+sudo echo "webmethods soft nofile 200000" >> /etc/security/limits.conf
 
-webmethods@DLNXESBV2APPAPI01:~> sudo sysctl -a | grep ^fs.file*
-fs.file-max = 793353
-fs.file-nr = 1056       0       793353
+sudo echo "webmethods hard nofile 200000" >> /etc/security/limits.conf
 
-webmethods@DLNXESBV2APPAPI01:~> sudo cat /proc/sys/fs/file-max
-793353
-
-Cette valeur est bien supérieure à 200000.
-
-•	[Prérequis technique] Vérification des paramètres de la „ulimit“
-
-
-webmethods@DLNXESBV2APPAPI01:~> ulimit -Hn
-4096
-webmethods@DLNXESBV2APPAPI01:~> ulimit -Sn
-1024
-
+ulimit -n 200000
+```
 
 As root:
 [root@DLNXESBV2APPAPI01 ~]$ sudo echo "webmethods soft nofile 200000" >> /etc/security/limits.conf
