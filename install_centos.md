@@ -13,7 +13,33 @@ yum upgrade
 adduser webmethods -c "User tools webmethods"
 passwd webmethods
 ```
+* Grant user as sudoer
+```bash
+visudo
 usermod -aG wheel webmethods
+su webmethods -
+groups
+```
+
+* Edit .bash_profile of user
+```bash
+JAVA_HOME=/
+
+export JAVA_HOME
+
+export PATH
+# Surcharge pour le prompt
+export PS1="\[\033[34m\]\u\[\033[00m\]@\[\033[32m\]\h\[\033[00m\]:\[\033[33m\]\w\[\033[00m\]> "
+
+# Couleurs dans le shell
+export CLICOLOR=1
+export LSCOLORS=dxfxcxdxbxegedabagacad
+```
+
+
+
+
+
 [root@DLNXESBV2APPAPI01 ~]$ su webmethods -
  [webmethods@DLNXESBV2APPAPI01 root]$ groups
 webmethods wheel
