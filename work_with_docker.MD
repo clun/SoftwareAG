@@ -108,9 +108,48 @@ sudo docker run -d -p 5555:5555 -p 9072:9072 --name apigw is:apigw
 
 ```
 
+## API Gateway (Clustering)
+
+* Operation listed before in "ApiGateway" should be executed before those one
+
+```shell
+
+# (1) Create a Docker container for Terracotta TSA
+//TODO
+
+# (2) Adapt IntegrationServer Configuration
+SoftwareAG\IntegrationServer\instances\default\config\server.cnf as described in the cluster configuration section.
+
+# (3) Adapt the wrapper configuration
+SoftwareAG\profiles\IS_default\configuration\custom_wrapper.conf) as described in the cluster configuration section.
+
+# (4) Adapt the Elastic Search Configuration
+SoftwareAG\EventDataStore\config\elasticsearch.yml)
+
+# (5) Docker Networks between containers
+
+# (6) Docker Compose
+
+```
 
 ## Lift n shift
 
 ```shell
 
+# (1) Creating DockerFile for IS only
+sudo ./is_container.sh createDockerfile
+
+# (2) Build Image based on dockerfile created before
+sudo ./is_container.sh build -Dimage.name=sagcel:integ_agent
+
+# (3) Create DockerFile for adding packages of themicroservices
+sudo ./is_container.sh createPackageDockerfile -Dimage.name=sagcel:integ_agent -Dpackage.list=MicroServiceHello
+
+# (4) Build Image based on dockerfile created before (sagcel:integ_agent)
+sudo ./is_container.sh buildPackage -Dimage.name=sagcel:hello_on_integ_agent
+
+# (5) Upload from integration Cloud
+sudo ./is_container.sh pushImage -Duser=<login_integration_cloud> -Dserver=frpresales.webmethodscloud.com -Dstage.name=development -Dsubdomain.name=frpresales -Dimage.name=sagcel:hello_on_integ_agent
 ```
+
+## Using SAG DockerHub (Private)
