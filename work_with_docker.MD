@@ -101,10 +101,16 @@ sudo ./is_container.sh build
 sudo ./apigw_container.sh createDockerfile
 
 # (4) Build Image based on dockerfile created before
-./apigw_container.sh build
+sudo ./apigw_container.sh build
 
+# (5) Run Api Gateway
+sudo docker run -d -p 5555:5555 -p 9072:9072 --name apigw is:apigw
 
-
+```
 
 
 ## Lift n shift
+
+```shell
+
+```
