@@ -3,9 +3,27 @@ This file would be used as note to list Docker commands in different environment
 
 # General Docker
 
-* List images available on local repository
+* [Installation de docker sur CentOS](https://docs.docker.com/engine/installation/linux/docker-ce/centos/#install-docker-ce)
+
+* Utilities commands
+
 ```sh
+# START docker service
+sudo service docker start
+sudo systemctl start docker
+
+# List images available
 sudo docker images
+
+# Check installation (with hello-world image)
+sudo docker run hello-world
+
+# Check running containers
+sudo docker ps
+
+# Stop a container
+sudo docker stop -t90 containerX
+
 ```
 * Login to target Docker Hub (to pull)
 ```sh
