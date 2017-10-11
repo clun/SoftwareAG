@@ -103,12 +103,17 @@ sudo ./apigw_container.sh createDockerfile
 # (4) Build Image based on dockerfile created before
 sudo ./apigw_container.sh build
 
-# (5) Run Api Gateway
+# (5) Check Ports (optional)
+sudo docker inspect --format='{{range $p, $conf := .Config.ExposedPorts}} {{$p}} {{end}}' is:apigw
+
+# (6) Run Api Gateway
 sudo docker run -d -p 5555:5555 -p 9072:9072 --name apigw is:apigw
 
+# (7) Stop Api Gateway
+sudo docker stop -t90 apigw
 ```
 
-## API Gateway (Clustering)
+## Configuring an API Gateway Docker Container Cluster
 
 * Operation listed before in "ApiGateway" should be executed before those one
 
