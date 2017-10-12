@@ -1,8 +1,17 @@
-
-Those notes are reminder to ease usage of Docker in General but also its implementation with SoftwareAG products.
-
 <img src="https://www.docker.com/sites/default/files/mono_vertical_large.png" height="100px" />
 
+---
+Those file stands as cheatsheet in order to start using Docker properly.
+
+#### Table of Contents  
+[Installation](#install)
+[Docker Service](#service)
+[Docker File](#dockerfile)
+[Docker Images](#image)
+[Docker Containers](#container)
+
+
+<a name="install"/>
 ### Installation
 
 * [Installation de docker sur CentOS](https://docs.docker.com/engine/installation/linux/docker-ce/centos/#install-docker-ce)
@@ -17,7 +26,8 @@ bcdedit /set hypervisorlaunchtype off
 bcdedit /set hypervisorlaunchtype auto 
 ```
 
-### Working with Docker service
+<a name="service"/>
+### Working with Docker service (Linux)
 
 ```shell
 # START docker service
@@ -32,12 +42,14 @@ sudo systemctl stop docker
 sudo systemctl status docker.service -a
 ```
 
+<a name="dockerfile"/>
 ### Working with DockerFile
 
 ```shell
 
 ```
 
+<a name="images"/>
 ### Working with Docker Images
 
 ```shell
