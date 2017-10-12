@@ -243,3 +243,18 @@ sudo ./is_container.sh pushImage -Duser=<login_integration_cloud> -Dserver=frpre
 ```
 
 ## Using SAG DockerHub (Private)
+
+
+<img src="https://static-www.elastic.co/assets/blt6050efb80ceabd47/elastic-logo%20(2).svg?q=994" height="40px" />
+
+## Install ElasticSearch
+
+```shell
+
+# Installation
+docker pull docker.elastic.co/elasticsearch/elasticsearch:5.6.3
+
+# Running
+docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:5.6.3
+```
+
