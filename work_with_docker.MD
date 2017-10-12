@@ -7,8 +7,9 @@ Those file stands as cheatsheet in order to start using Docker properly.
 - [Docker Service](#service)
 - [Docker File](#dockerfile)
 - [Docker Images](#image)
+- [Docker Volumes](#volume)
 - [Docker Containers](#container)
-
+- [Docker Hub](#hub)
 
 <a name="install"/>
 
@@ -139,6 +140,25 @@ sudo docker kill -t90 containerX
 # Remove an (not running)  from repository
 sudo docker rm <containerID>
 ```
+<a name="volume"/>
+
+### Working with Docker Volume
+
+```shell
+# create a volume
+docker volume create --name eventDataStore1
+
+# List Volumes
+docker volume ls
+
+# Inspect
+docker volume inspect eventDataStore1
+
+# Start Container with a volume
+docker run -d -p 5555:5555 -p 9072:9072 -v eventDataStore1:/sag/EventDataStore/data/SAG_EventDataStore/ --name apigateway  is:apigw
+```
+
+<a name="hub"/>
 
 ## Work with a dockerHub
 
