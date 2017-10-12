@@ -160,7 +160,7 @@ docker run -d -p 5555:5555 -p 9072:9072 -v eventDataStore1:/sag/EventDataStore/d
 
 <a name="hub"/>
 
-## Work with a dockerHub
+## Working with dockerHub
 
 ```shell
 # Login to target Docker Hub (to pull)
@@ -175,6 +175,20 @@ sudo docker push urldockerhub/repositoryName:tagName
 # PULL
 sudo docker push urldockerhub/repositoryName:tagName
 ```
+
+<a name="network"/>
+
+## Working with Docker Network
+
+```shell
+# List networks
+docker network ls
+
+# See bridge
+docker network inspect
+```
+
+
 
 <img src="http://www.softwareag.com/corporate/images/logo_sag_150_28_tcm16-134073.jpg" height="40px" />
 
