@@ -72,6 +72,8 @@ ENV MYVARNAME MYVALUE
 EXPOSE 8101
 
 # Commands at startup
+ENTRYPOINT ["/usr/sbin/apache2"]
+# Optional parameters
 CMD ["/usr/local/bin/couchdb"]
 ```
 
@@ -107,25 +109,21 @@ sudo docker commit <containerID> <imageName>
 ### Working with Containers
 
 ```shell
-# Remove an (not running)  from repository
-sudo docker rm <containerID>
-
-# Check installation (with hello-world image)
-sudo docker run hello-world
-
 # Check running containers
 sudo docker ps
 sudo docker ps -l (option to see last)
 sudo docker ps -a (option to see all)
 
-# Detach from Container
-Escape sequence Ctrl-p + Ctrl-q.
+# Check installation (with hello-world image)
+sudo docker run hello-world
 
-# Attach to Container
-sudo docker attach <container_ID> 
-
+# Go as SSH
+sudo docker exec -it <container_ID> bash
 
 # Start a container
+# -d is for detach
+# -i is fot interactive
+# -t is fot interactive
 sudo docker run -d -p 5555:5555 --name <containerName> <imageName>:<tag>
 
 # Stop a container
@@ -133,6 +131,9 @@ sudo docker stop -t90 containerX
 
 # Kill a container
 sudo docker kill -t90 containerX
+
+# Remove an (not running)  from repository
+sudo docker rm <containerID>
 ```
 
 ## Work with a dockerHub
