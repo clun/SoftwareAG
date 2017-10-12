@@ -184,11 +184,16 @@ sudo docker push urldockerhub/repositoryName:tagName
 # List networks
 docker network ls
 
-# See bridge
-docker network inspect
+# See bridge (172.17.0.1 default gateway, 172.17.0.X default IP)
+docker network inspect bridge
+
+# Use default 'bridge' on leverage on 'link'
+docker run -d --name redis1 redis
+docker run -d --link redis1:redis1 --name redis1 redis
+
+# Create user-defined network 
+
 ```
-
-
 
 <img src="http://www.softwareag.com/corporate/images/logo_sag_150_28_tcm16-134073.jpg" height="40px" />
 
@@ -242,8 +247,16 @@ sudo docker stop -t90 apigw
 
 ```shell
 
-# (1) Create a Docker container for Terracotta TSA
-//TODO
+# Link Containers
+
+# A) Start a standAlone TSA
+docker run --name terracotta1 -p 9510:9510 -d terracotta/terracotta-server-oss:4.3.4
+# B) Start APIGW with link to TSA
+docker run --name apigateway1 -p 5555:5555 -p 9072:9072 --link terracotta1:terracotta1 -d is:apigw
+# C) Connect to APIGW and test communication
+docker exec -it <containerID> bash
+$ping terracotta1
+```
 
 # (2) Adapt IntegrationServer Configuration
 SoftwareAG\IntegrationServer\instances\default\config\server.cnf as described in the cluster configuration section.
@@ -286,6 +299,8 @@ sudo ./is_container.sh pushImage -Duser=<login_integration_cloud> -Dserver=frpre
 
 ```shell
 docker run --name tc-server -p 9510:9510 -d terracotta/terracotta-server-oss:4.3.4
+
+
 ```
 
 <img src="https://static-www.elastic.co/assets/blt6050efb80ceabd47/elastic-logo%20(2).svg?q=994" height="40px" />
@@ -300,4 +315,6 @@ docker pull docker.elastic.co/elasticsearch/elasticsearch:5.6.3
 # Running
 docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:5.6.3
 ```
+
+
 
