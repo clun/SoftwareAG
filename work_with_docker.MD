@@ -3,24 +3,56 @@ Those notes are reminder to ease usage of Docker in General but also its impleme
 
 <img src="https://www.docker.com/sites/default/files/mono_vertical_large.png" height="100px" />
 
-## Basic Commands
+### Installation
 
 * [Installation de docker sur CentOS](https://docs.docker.com/engine/installation/linux/docker-ce/centos/#install-docker-ce)
 
-* Utilities commands
+* Hyper-V (Windows)
+
+```shell
+# Disable hyper-V on Windows
+bcdedit /set hypervisorlaunchtype off
+
+# Enable hyper-V on Windows
+bcdedit /set hypervisorlaunchtype auto 
+```
+
+### Working with Docker service
 
 ```shell
 # START docker service
 sudo service docker start
-OR
 sudo systemctl start docker
 
+# STOP docker service
+sudo service docker stop
+sudo systemctl stop docker
+
+# Get history docker
+sudo systemctl status docker.service -a
+```
+
+### Working with DockerFile
+
+```shell
+
+```
+
+### Working with Docker Images
+
+```shell
 # List images available
 sudo docker images
 
 # Remove an image from repository
 sudo docker rmi -f repoName:tagName
 
+# Commit changes to a new image
+sudo docker commit <containerID> <imageName>
+
+* Work with Containers
+
+```shell
 # Remove an (not running)  from repository
 sudo docker rm <containerID>
 
@@ -38,8 +70,6 @@ Escape sequence Ctrl-p + Ctrl-q.
 # Attach to Container
 sudo docker attach <container_ID> 
 
-# Commit changes to a new image
-sudo docker commit <containerID> <imageName>
 
 # Start a container
 sudo docker run -d -p 5555:5555 --name <containerName> <imageName>:<tag>
