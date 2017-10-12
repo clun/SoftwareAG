@@ -3,15 +3,15 @@
 ---
 Those file stands as cheatsheet in order to start using Docker properly.
 
-#### Table of Contents  
-[Installation](#install)
-[Docker Service](#service)
-[Docker File](#dockerfile)
-[Docker Images](#image)
-[Docker Containers](#container)
+- [Installation](#install)
+- [Docker Service](#service)
+- [Docker File](#dockerfile)
+- [Docker Images](#image)
+- [Docker Containers](#container)
 
 
 <a name="install"/>
+
 ### Installation
 
 * [Installation de docker sur CentOS](https://docs.docker.com/engine/installation/linux/docker-ce/centos/#install-docker-ce)
@@ -27,6 +27,7 @@ bcdedit /set hypervisorlaunchtype auto
 ```
 
 <a name="service"/>
+
 ### Working with Docker service (Linux)
 
 ```shell
@@ -43,13 +44,15 @@ sudo systemctl status docker.service -a
 ```
 
 <a name="dockerfile"/>
+
 ### Working with DockerFile
 
 ```shell
 
 ```
 
-<a name="images"/>
+<a name="image"/>
+
 ### Working with Docker Images
 
 ```shell
@@ -61,8 +64,11 @@ sudo docker rmi -f repoName:tagName
 
 # Commit changes to a new image
 sudo docker commit <containerID> <imageName>
+```
 
-* Work with Containers
+<a name="container"/>
+
+### Working with Containers
 
 ```shell
 # Remove an (not running)  from repository
