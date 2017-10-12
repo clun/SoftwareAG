@@ -47,9 +47,39 @@ sudo systemctl status docker.service -a
 
 ### Working with DockerFile
 
+* Sample File
 ```shell
+# Basic install of couchdb
+# This will move the couchdb http server to port 8101 so adjust the port for your needs. 
+ARG VERSION=latest
+FROM busybox:$VERSION
+MAINTAINER Clunven
 
+#Append item to files
+RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ precise universe" >> /etc/apt/sources.list
+
+# COPY OR IMPORT FILES
+COPY server.cnf /tmp/targetFolder
+
+# Execute command to prepare
+RUN apt-get -y update
+RUN /bin/bash -c 'source $HOME/.bashrc; echo $HOME'
+
+# Define environment variable
+ENV MYVARNAME MYVALUE
+
+# Expose ports
+EXPOSE 8101
+
+# Commands at startup
+CMD ["/usr/local/bin/couchdb"]
 ```
+
+* Create an image from DockerFile [doc](https://docs.docker.com/engine/reference/commandline/build/)
+```shell
+build -f DockerFile.txt -t repo:tag
+```
+
 
 <a name="image"/>
 
@@ -58,6 +88,12 @@ sudo systemctl status docker.service -a
 ```shell
 # List images available
 sudo docker images
+
+# Export image as TARBALL
+sudo docker save -o /tmp/target.tar repo:tag
+
+# Import image from TARBALL
+sudo docker load -i /tmp/target.tar
 
 # Remove an image from repository
 sudo docker rmi -f repoName:tagName
