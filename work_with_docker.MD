@@ -9,6 +9,7 @@ Those file stands as cheatsheet in order to start using Docker properly.
 - [Docker Images](#image)
 - [Docker Volumes](#volume)
 - [Docker Containers](#container)
+- [Docker Network](#network)
 - [Docker Hub](#hub)
 
 <a name="install"/>
@@ -189,10 +190,13 @@ docker network inspect bridge
 
 # Use default 'bridge' on leverage on 'link'
 docker run -d --name redis1 redis
-docker run -d --link redis1:redis1 --name redis1 redis
+docker run -d --link redis1:redis1 --name container2 busybox
 
 # Create user-defined network 
+docker network create --driver bridge myNetwork
 
+# Run docker using target network
+docker run --network=myNetwork -itd --name=container3 busybox
 ```
 
 <img src="http://www.softwareag.com/corporate/images/logo_sag_150_28_tcm16-134073.jpg" height="40px" />
