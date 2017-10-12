@@ -102,6 +102,7 @@ sudo docker rmi -f repoName:tagName
 
 # Commit changes to a new image
 sudo docker commit <containerID> <imageName>
+
 ```
 
 <a name="container"/>
@@ -116,6 +117,9 @@ sudo docker ps -a (option to see all)
 
 # Check installation (with hello-world image)
 sudo docker run hello-world
+
+# Check Logs of tc-server
+docker logs -f tc-server
 
 # Go as SSH
 sudo docker exec -it <container_ID> bash
@@ -242,8 +246,13 @@ sudo ./is_container.sh buildPackage -Dimage.name=sagcel:hello_on_integ_agent
 sudo ./is_container.sh pushImage -Duser=<login_integration_cloud> -Dserver=frpresales.webmethodscloud.com -Dstage.name=development -Dsubdomain.name=frpresales -Dimage.name=sagcel:hello_on_integ_agent
 ```
 
-## Using SAG DockerHub (Private)
+<img src="https://avatars2.githubusercontent.com/u/4680389?v=4&s=200" height="40px" />
 
+## Installation
+
+```shell
+docker run --name tc-server -p 9510:9510 -d terracotta/terracotta-server-oss:4.3.4
+```
 
 <img src="https://static-www.elastic.co/assets/blt6050efb80ceabd47/elastic-logo%20(2).svg?q=994" height="40px" />
 
