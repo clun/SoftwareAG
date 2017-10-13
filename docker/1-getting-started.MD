@@ -14,7 +14,7 @@ Those file stands as cheatsheet in order to start using Docker properly.
 
 <a name="install"/>
 
-### Installation
+## Installation
 
 * [Installation de docker sur CentOS](https://docs.docker.com/engine/installation/linux/docker-ce/centos/#install-docker-ce)
 
@@ -30,7 +30,7 @@ bcdedit /set hypervisorlaunchtype auto
 
 <a name="service"/>
 
-### Working with Docker service (Linux)
+## Working with Docker service (Linux)
 
 ```shell
 # START docker service
@@ -50,7 +50,7 @@ sudo systemctl status docker.service -a
 
 <a name="dockerfile"/>
 
-### Working with DockerFile
+## Working with DockerFile
 
 * Sample File
 ```shell
@@ -90,7 +90,7 @@ build -f DockerFile.txt -t repo:tag
 
 <a name="image"/>
 
-### Working with Docker Images
+## Working with Docker Images
 
 ```shell
 # List images available
@@ -112,7 +112,7 @@ sudo docker commit <containerID> <imageName>
 
 <a name="container"/>
 
-### Working with Containers
+## Working with Containers
 
 ```shell
 # Check running containers
@@ -146,7 +146,7 @@ sudo docker rm <containerID>
 ```
 <a name="volume"/>
 
-### Working with Docker Volume
+## Working with Docker Volume
 
 ```shell
 # create a volume
