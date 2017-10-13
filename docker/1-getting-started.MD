@@ -41,6 +41,9 @@ sudo systemctl start docker
 sudo service docker stop
 sudo systemctl stop docker
 
+# Get info (containers, images, settings)
+docker info
+
 # Get history docker
 sudo systemctl status docker.service -a
 ```
@@ -164,8 +167,13 @@ docker run -d -p 5555:5555 -p 9072:9072 -v eventDataStore1:/sag/EventDataStore/d
 ## Working with dockerHub
 
 ```shell
+
+# FOR WINDOWS & INSECURE REGISTRIES
+# Please edit the 
+
+
 # Login to target Docker Hub (to pull)
-docker login -u <username> -p <password> https://frpresales.webmethodscloud.com/
+docker login -u <username> -p <password> XXX
 
 # TAG
 sudo docker  tag repositoryName:tagName urldockerhub/repositoryName:tagName
