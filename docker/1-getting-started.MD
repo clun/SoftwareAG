@@ -3,14 +3,15 @@
 ---
 Those file stands as cheatsheet in order to start using Docker properly.
 
-- [Installation](#install)
-- [Docker Service](#service)
-- [Docker File](#dockerfile)
-- [Docker Images](#image)
-- [Docker Volumes](#volume)
-- [Docker Containers](#container)
-- [Docker Network](#network)
-- [Docker Hub](#hub)
+- [Installation](#install) : install on both linux and windows
+- [Docker Service](#service) : start and stop service on linux
+- [Docker File](#dockerfile) : instruction file to build images
+- [Docker Images](#image) : repository of images on local machine
+- [Docker Containers](#container) : instanciate images into containers
+- [Docker Volumes](#volume) : add persistent storage as external volume
+- [Docker Network](#network) : make containers communicate to each other
+- [Docker Hub](#hub) : publish your images to others
+- [Docker Compose](#compose) : run several containers with a single line
 
 <a name="install"/>
 
@@ -190,16 +191,37 @@ docker volume inspect eventDataStore1
 docker run -d -p 5555:5555 -p 9072:9072 -v eventDataStore1:/sag/EventDataStore/data/SAG_EventDataStore/ --name apigateway  is:apigw
 ```
 
+<a name="network"/>
+
+## Working with Docker Network
+
+```shell
+# List networks
+docker network ls
+
+# See network detail (172.17.0.1 default gateway, 172.17.0.X default IP)
+docker network inspect bridge
+
+# 'link' leverage on default 'bridge'
+docker run -d --name redis1 redis
+docker run -d --link redis1:redis1 --name container2 busybox
+
+# Create user-defined network
+docker network create --driver bridge apigwcluster
+
+# Run a container using defined network
+docker run -d --name=c1 -h=c1 --network=apigwcluster softwareag/terracotta-server:4.3.4
+docker run -d --name=c2 -h=c2 --network=apigwcluster softwareag/terracotta-server:4.3.4
+docker exec -it 1c4e06a69e27 bash
+$ping c1 ==> OK
+$ping c2 ==> OK
+```
+
 <a name="hub"/>
 
 ## Working with dockerHub
 
 ```shell
-
-# FOR WINDOWS & INSECURE REGISTRIES
-# Please edit the 
-
-
 # Login to target Docker Hub (to pull)
 docker login -u <username> -p <password> XXX
 
@@ -213,24 +235,78 @@ sudo docker push urldockerhub/repositoryName:tagName
 sudo docker push urldockerhub/repositoryName:tagName
 ```
 
-<a name="network"/>
+<a name="compose"/>
 
-## Working with Docker Network
+## Working with Docker Compose
 
+Docker compose is a tool to build small clustering solutions [Documentation](https://docs.docker.com/compose/)
+
+* Run a compose file
 ```shell
-# List networks
-docker network ls
+docker-compose up
+```
 
-# See bridge (172.17.0.1 default gateway, 172.17.0.X default IP)
-docker network inspect bridge
+* Create sample `docker-compose.yml` file
+```yml
+version: '3'
 
-# Use default 'bridge' on leverage on 'link'
-docker run -d --name redis1 redis
-docker run -d --link redis1:redis1 --name container2 busybox
+networks:
+  apigw-cluster:
+  driver: overlay
 
-# Create user-defined network 
-docker network create --driver bridge myNetwork
+services:
+  
+  # API GW Node 1
+  apigateway1:
+    image: is:apigw
+    networks:
+     - apigw-cluster
+    ports:
+     - "5555:5555"
+     - "9072:9072"
+     - "9073:9073"
+  
+  # API GW Node 2
+  apigateway2:
+    image: is:apigw
+    networks:
+     - apigw-cluster
+    ports:
+     - "15555:5555"
+     - "19072:9072"
+     - "19073:9073"
+  
+  # API GW Node 3
+  apigateway3:
+    image: is:apigw
+    networks:
+     - apigw-cluster
+    ports:
+     - "25555:5555"
+     - "29072:9072"
+     - "29073:9073"
+    
+  # TSA Server 1
+  terracotta1:
+    hostname: terracotta1
+    image: terracotta/terracotta-server-oss:4.3.4
+    environment:
+     - TC_SERVER1=terracotta1
+     - TC_SERVER2=terracotta2
+    networks:
+     - apigw-cluster
+    ports:
+     - "9540:9540"
 
-# Run docker using target network
-docker run --network=myNetwork -itd --name=container3 busybox
+  # TSA Server 2
+  terracotta2:
+    hostname: terracotta2
+    image: terracotta/terracotta-server-oss:4.3.4
+    environment:
+     - TC_SERVER1=terracotta1
+     - TC_SERVER2=terracotta2
+    networks:
+     - apigw-cluster
+    ports:
+     - "19540:9540"
 ```
