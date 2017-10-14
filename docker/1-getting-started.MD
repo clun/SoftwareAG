@@ -1,7 +1,7 @@
 <img src="https://www.docker.com/sites/default/files/mono_vertical_large.png" height="100px" />
 
 ---
-Those file stands as cheatsheet in order to start using Docker properly.
+Welcome !! , this small getting-started guide stands as cheatsheet in order to start using Docker (samples are associated to SoftwareAG products).
 
 - [Installation](#install) : install on both linux and windows
 - [Docker Service](#service) : start and stop service on linux
