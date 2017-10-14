@@ -16,9 +16,11 @@ Those file stands as cheatsheet in order to start using Docker properly.
 
 ## Installation
 
-* [Installation de docker sur CentOS](https://docs.docker.com/engine/installation/linux/docker-ce/centos/#install-docker-ce)
+* [Docker installation on CentOS](https://docs.docker.com/engine/installation/linux/docker-ce/centos/#install-docker-ce)
 
-* Hyper-V (Windows)
+* [Docker installation on Windows](https://docs.docker.com/docker-for-windows/install/)
+
+* **Hyper-V** *(hypervisor required for docker)* must be enabled in Windows machine. As it is not possible to run virtual machine (VMWare) when this flag is enabled you should probably have to enable and disable it frequently. In PowerShell, as Administrator run the following command and restart Windows.
 
 ```shell
 # Disable hyper-V on Windows
@@ -32,6 +34,10 @@ bcdedit /set hypervisorlaunchtype auto
 
 ## Working with Docker service (Linux)
 
+Docker is a command line tools but the service behind should be started or the Windows Application should be started.
+
+* Linux : Start and Stop Docker Service
+
 ```shell
 # START docker service
 sudo service docker start
@@ -40,11 +46,18 @@ sudo systemctl start docker
 # STOP docker service
 sudo service docker stop
 sudo systemctl stop docker
+```
+
+* Once started you can information of your environment
+
+```shell
+# Get Version
+docker version
 
 # Get info (containers, images, settings)
 docker info
 
-# Get history docker
+# <img src="http://ff4j.org/external-pics/icon-linux.png" height="20px"/> Get history docker
 sudo systemctl status docker.service -a
 ```
 
