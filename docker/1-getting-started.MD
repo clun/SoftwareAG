@@ -32,11 +32,11 @@ bcdedit /set hypervisorlaunchtype auto
 
 <a name="service"/>
 
-## Working with Docker service (Linux)
+## Working with Docker service
 
 Docker is a command line tools but the service behind should be started or the Windows Application should be started.
 
-* Linux : Start and Stop Docker Service
+* Start and Stop Docker Service
 
 ```shell
 # START docker service
@@ -46,6 +46,9 @@ sudo systemctl start docker
 # STOP docker service
 sudo service docker stop
 sudo systemctl stop docker
+
+# Get information on service
+sudo systemctl status docker.service -a
 ```
 
 * Once started you can information of your environment
@@ -56,16 +59,14 @@ docker version
 
 # Get info (containers, images, settings)
 docker info
-
-# <img src="http://ff4j.org/external-pics/icon-linux.png" height="20px"/> Get history docker
-sudo systemctl status docker.service -a
 ```
 
 <a name="dockerfile"/>
 
 ## Working with DockerFile
 
-* Sample File
+* Docker file are like makefile and is a list of instruction to build an image. Your start from an existing image like an OS with the `FROM`keyword.
+
 ```shell
 # Basic install of couchdb
 # This will move the couchdb http server to port 8101 so adjust the port for your needs. 
@@ -94,12 +95,11 @@ ENTRYPOINT ["/usr/sbin/apache2"]
 # Optional parameters
 CMD ["/usr/local/bin/couchdb"]
 ```
+* Build an image from a DockerFile [documentation](https://docs.docker.com/engine/reference/commandline/build/)
 
-* Create an image from DockerFile [doc](https://docs.docker.com/engine/reference/commandline/build/)
 ```shell
 build -f DockerFile.txt -t repo:tag
 ```
-
 
 <a name="image"/>
 
@@ -115,11 +115,13 @@ sudo docker save -o /tmp/target.tar repo:tag
 # Import image from TARBALL
 sudo docker load -i /tmp/target.tar
 
-# Remove an image from repository
+# Remove an image from repository (should be stop)
+# Option -f is optional if the image has several tags.
 sudo docker rmi -f repoName:tagName
 
-# Commit changes to a new image
-sudo docker commit <containerID> <imageName>
+# Rename image
+sudo docker tag image:tagName image:newTag
+sudo docker tag sag/apigateway:10.1 tag sag/apigateway-clustered:10.1
 
 ```
 
@@ -139,7 +141,7 @@ sudo docker run hello-world
 # Check Logs of tc-server
 docker logs -f tc-server
 
-# Go as SSH
+# Connect SSH to a running container (if linux)
 sudo docker exec -it <container_ID> bash
 
 # Start a container
@@ -156,6 +158,19 @@ sudo docker kill -t90 containerX
 
 # Remove an (not running)  from repository
 sudo docker rm <containerID>
+
+# List all containers ID
+docker ps -aq
+
+# List all exited containers ID (to clean up)
+docker ps -aq -f status=exited
+
+# Remove containers (linux)
+docker rm `docker ps -aq -f status=exited`
+
+# Commit a container as a new image when changing data
+docker commit -a=clunven -m="Adding sample stuff" -p=true d92088bedb2a terracotta-hello:1.0
+
 ```
 <a name="volume"/>
 
