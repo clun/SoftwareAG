@@ -147,8 +147,11 @@ sudo docker exec -it <container_ID> bash
 
 # Start a container
 # -d is for detach
-# -i is fot interactive
-# -t is fot interactive
+# -i is for interactive
+# -t is for interactive
+# -m is for memory eg:10214M
+# --memory-reservation 200M
+# -e "var=value"
 sudo docker run -d -p 5555:5555 --name <containerName> <imageName>:<tag>
 
 # Stop a container
