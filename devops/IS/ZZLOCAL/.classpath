@@ -30,5 +30,6 @@
 	<classpathentry kind="var" path="ECLIPSE_E4_MWB"/>
 	<classpathentry kind="var" path="ECLIPSE_OSGI_SVC"/>
 	<classpathentry kind="var" path="ECLIPSE_E4_CORE"/>
+	<classpathentry kind="con" path="com.sag.gcs.wmtestsuite.runtime.WmTestSuiteContainer"/>
 	<classpathentry kind="output" path="code/classes"/>
 </classpath>
