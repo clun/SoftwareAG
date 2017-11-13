@@ -123,8 +123,11 @@ sudo docker rmi -f repoName:tagName
 # Rename image
 sudo docker tag image:tagName image:newTag
 sudo docker tag sag/apigateway:10.1 tag sag/apigateway-clustered:10.1
-
 ```
+
+To understand Docker images lifecycle you can use : 
+
+<img src="https://blog.octo.com/wp-content/uploads/2014/01/docker-stages.png" />
 
 <a name="container"/>
 
