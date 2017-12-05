@@ -4,7 +4,7 @@ Analytics and CloudStreams in the Designer.
 
 [Go to CloudStreams](http://localhost:5555/WmCloudStreams)
 
-# SalesForce
+## SalesForce
 
 
 - Reinit your password:
