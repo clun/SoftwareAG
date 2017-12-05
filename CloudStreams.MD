@@ -1,14 +1,19 @@
 
-This file group some notes to setup connections with CloudStreams. We expect that you installed both CloudStreams, CloudStreams 
-Analytics and CloudStreams in the Designer.
+# CloudStreams
 
-[Go to CloudStreams](http://localhost:5555/WmCloudStreams)
+<img src="http://www2.softwareag.com/Images/be/wM_CloudStreams_small.png" height="300px" />
+
+Welcome ! In the following document you will find some tips to use the CloudStreams product.We expect that you have installed The 3 following components : CloudStreams, CloudStreams Analytics and Designer CloudStreams Plugin.
+
+Importants links
+- [Avalable Connectors](http://techcommunity.softwareag.com/ecosystem/communities/public/webmethods/products/cloudstreams/downloads/connectors-cloudstreams/)
+- [Console CloudStreams](http://localhost:5555/WmCloudStreams)
 
 ## SalesForce
 
+- Download the documentation and provider [HERE](http://techcommunity.softwareag.com/ecosystem/communities/public/webmethods/products/cloudstreams/downloads/SalesForce-CRM-Bulk-Data-Loader/)
 
-- Reinit your password:
-https://na73.lightning.force.com/one/one.app#/settings/personal/ResetApiToken/home
+- Reinit your password [HERE](https://na73.lightning.force.com/one/one.app#/settings/personal/ResetApiToken/home)
 
 
 
