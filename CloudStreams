@@ -1,0 +1,14 @@
+
+This file group some notes to setup connections with CloudStreams. We expect that you installed both CloudStreams, CloudStreams 
+Analytics and CloudStreams in the Designer.
+
+[Go to CloudStreams](http://localhost:5555/WmCloudStreams)
+
+# SalesForce
+
+
+- Reinit your password:
+https://na73.lightning.force.com/one/one.app#/settings/personal/ResetApiToken/home
+
+
+
